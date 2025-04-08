@@ -17,7 +17,7 @@ class Trade(models.Model):
     ]
     
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    user = models.ForeignKey('User Profile', on_delete=models.CASCADE)
+    user = models.ForeignKey('UserProfile', on_delete=models.CASCADE)  # Corrected reference
     quantity = models.PositiveIntegerField()
     trade_type = models.CharField(max_length=4, choices=TRADE_TYPE_CHOICES)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -26,7 +26,7 @@ class Trade(models.Model):
         return f"{self.trade_type} {self.quantity} of {self.product.name} by {self.user.username}"
 
 class Message(models.Model):
-    user = models.ForeignKey('User Profile', on_delete=models.CASCADE)
+    user = models.ForeignKey('UserProfile', on_delete=models.CASCADE)  # Corrected reference
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
@@ -35,7 +35,7 @@ class Message(models.Model):
         return f"Message from {self.user.username} at {self.timestamp}"
 
 class Notification(models.Model):
-    user = models.ForeignKey('User Profile', on_delete=models.CASCADE)
+    user = models.ForeignKey('UserProfile', on_delete=models.CASCADE)  # Corrected reference
     type = models.CharField(max_length=50) 
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
